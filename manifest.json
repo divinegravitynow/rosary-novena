@@ -1,0 +1,25 @@
+{
+  "name": "묵주 9일 기도",
+  "short_name": "묵주기도",
+  "description": "묵주 9일 기도 (Rosary Novena) PWA 앱",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#3D010D",
+  "theme_color": "#3D010D",
+  "orientation": "portrait",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
