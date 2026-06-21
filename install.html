@@ -25,6 +25,7 @@ html,body{
   position:fixed;top:0;left:0;right:0;bottom:0;
   max-width:420px;margin:0 auto;
   height:100%;height:100dvh;
+  /* ★ overflow:hidden 제거 → scroll-body가 스크롤되도록 */
   overflow:hidden;
   background:linear-gradient(160deg,#2A0109 0%,#3D010D 50%,#480110 100%);
   display:flex;flex-direction:column;
@@ -37,34 +38,38 @@ html,body{
 
 /* ── 헤더 ── */
 .screen-header{
-  padding:1rem 1.25rem 0.4rem;
+  padding:1rem 1.25rem 0.5rem;
   display:flex;align-items:center;gap:0.85rem;
   flex-shrink:0;position:relative;z-index:1;
 }
 .back-btn{
-  width:34px;height:34px;border-radius:50%;
+  width:38px;height:38px;border-radius:50%;
   border:1px solid var(--gold3);
   background:transparent;color:var(--gold);
-  cursor:pointer;font-size:1rem;
+  cursor:pointer;font-size:1.1rem;
   display:flex;align-items:center;justify-content:center;
   transition:all 0.2s;flex-shrink:0;
   text-decoration:none;
 }
 .back-btn:hover{background:rgba(212,135,154,0.1);}
 .back-label{
-  font-family:'Cinzel',serif;font-size:0.78rem;
+  font-family:'Cinzel',serif;font-size:0.9rem;
   color:var(--dim);letter-spacing:0.05rem;
 }
 .screen-title{
-  font-family:'Cinzel',serif;font-size:1rem;color:var(--gold);
+  font-family:'Cinzel',serif;font-size:1.05rem;color:var(--gold);
   position:absolute;left:50%;transform:translateX(-50%);
   white-space:nowrap;pointer-events:none;
 }
 
-/* ── 스크롤 바디 ── */
+/* ── 스크롤 바디 ★ 핵심 수정 ── */
 .scroll-body{
-  flex:1;min-height:0;overflow-y:auto;
-  padding:0.75rem 1.25rem 2rem;
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  /* ★ 하단 여백 충분히 확보 */
+  padding:0.75rem 1.25rem 5rem;
   position:relative;z-index:1;
   -webkit-overflow-scrolling:touch;
 }
@@ -77,24 +82,28 @@ html,body{
   text-align:center;padding:0.5rem 0 1.25rem;
 }
 .intro-icon{
-  font-size:2.2rem;margin-bottom:0.5rem;
+  font-size:2.6rem;margin-bottom:0.5rem;
   display:block;
 }
 .intro-title{
-  font-family:'Cinzel',serif;font-size:1.05rem;
+  font-family:'Cinzel',serif;
+  /* ★ 크게 */
+  font-size:1.2rem;
   color:var(--gold2);letter-spacing:0.05rem;
-  margin-bottom:0.4rem;
+  margin-bottom:0.5rem;
 }
 .intro-desc{
-  font-size:0.85rem;color:var(--dim);
-  line-height:1.7;
+  /* ★ 크게 */
+  font-size:1.05rem;color:var(--dim);
+  line-height:1.75;
 }
 .intro-url{
-  display:inline-block;margin-top:0.5rem;
-  font-family:'Cinzel',serif;font-size:0.78rem;
-  color:var(--gold);letter-spacing:0.04rem;
+  display:inline-block;margin-top:0.6rem;
+  font-family:'EB Garamond',Georgia,serif;font-size:1rem;
+  color:var(--gold);letter-spacing:0.06rem;
   border:1px solid var(--border);border-radius:6px;
-  padding:0.25rem 0.75rem;
+  padding:0.3rem 0.85rem;
+  text-decoration:none;
 }
 
 /* ── 구분선 ── */
@@ -105,7 +114,7 @@ html,body{
   content:'';flex:1;height:1px;
   background:linear-gradient(to right,transparent,var(--gold3),var(--gold),var(--gold3),transparent);
 }
-.gold-line span{color:var(--gold);font-size:0.78rem;letter-spacing:0.05rem;}
+.gold-line span{color:var(--gold);font-size:0.9rem;}
 
 /* ── 탭 ── */
 .tabs{
@@ -113,12 +122,14 @@ html,body{
   justify-content:center;margin-bottom:1rem;
 }
 .tab{
-  padding:6px 14px;border-radius:20px;
+  padding:8px 14px;border-radius:20px;
   border:1px solid var(--gold3);
   background:transparent;color:var(--dim);
-  font-family:'Cinzel',serif;font-size:0.72rem;
+  font-family:'Cinzel',serif;
+  /* ★ 크게 */
+  font-size:0.82rem;
   letter-spacing:0.04rem;cursor:pointer;
-  transition:all 0.2s;text-align:center;line-height:1.5;
+  transition:all 0.2s;text-align:center;line-height:1.55;
 }
 .tab.active{
   background:linear-gradient(135deg,var(--gold3),#5A1828);
@@ -134,70 +145,88 @@ html,body{
 @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
 
 /* ── 스텝 카드 ── */
-.step-list{display:flex;flex-direction:column;gap:0.65rem;}
+.step-list{display:flex;flex-direction:column;gap:0.75rem;}
 .step{
-  display:flex;align-items:flex-start;gap:0.85rem;
+  display:flex;align-items:flex-start;gap:0.9rem;
   background:rgba(255,255,255,0.03);
   border:1px solid var(--border);border-radius:12px;
-  padding:0.85rem 1rem;
+  padding:1rem 1rem;
 }
 .step-num{
-  min-width:30px;height:30px;border-radius:50%;
+  min-width:34px;height:34px;border-radius:50%;
   background:linear-gradient(135deg,var(--gold3),#5A1828);
   border:1px solid var(--gold);
-  color:var(--ivory);font-size:0.85rem;font-weight:600;
+  color:var(--ivory);
+  /* ★ 크게 */
+  font-size:1rem;
+  font-weight:600;
   display:flex;align-items:center;justify-content:center;
   flex-shrink:0;margin-top:1px;font-family:'Cinzel',serif;
 }
-.step-body{}
 .step-title{
-  font-family:'Cinzel',serif;font-size:0.88rem;
-  color:var(--gold2);margin-bottom:0.25rem;
+  font-family:'Cinzel',serif;
+  /* ★ 크게 */
+  font-size:1rem;
+  color:var(--gold2);margin-bottom:0.3rem;
   letter-spacing:0.03rem;
 }
 .step-desc{
-  font-size:0.9rem;color:var(--text);
-  line-height:1.65;
+  /* ★ 크게 */
+  font-size:1.05rem;
+  color:var(--text);
+  line-height:1.7;
 }
 .step-desc .hl{
   display:inline-block;
   background:rgba(212,135,154,0.18);
   color:var(--gold2);border-radius:4px;
-  padding:1px 7px;font-family:'Cinzel',serif;
-  font-size:0.8rem;letter-spacing:0.03rem;
+  padding:2px 8px;
+  font-family:'EB Garamond',Georgia,serif;
+  font-size:1rem;
+  letter-spacing:0.03rem;
 }
 .step-note{
-  margin-top:0.45rem;
+  margin-top:0.5rem;
   display:flex;align-items:center;gap:0.5rem;
   background:rgba(212,135,154,0.08);
   border:1px dashed rgba(212,135,154,0.25);
-  border-radius:7px;padding:0.4rem 0.65rem;
-  font-size:0.78rem;color:var(--dim);line-height:1.5;
+  border-radius:7px;padding:0.45rem 0.75rem;
+  /* ★ 크게 */
+  font-size:0.92rem;
+  color:var(--dim);line-height:1.5;
 }
 .step-note svg{flex-shrink:0;}
 
 /* ── 완료 박스 ── */
 .done-box{
-  margin-top:0.9rem;
+  margin-top:1rem;
   background:rgba(212,135,154,0.08);
   border-left:3px solid var(--gold);
   border-radius:0 8px 8px 0;
-  padding:0.75rem 1rem;
-  font-size:0.88rem;color:var(--text);line-height:1.65;
+  padding:0.85rem 1rem;
+  /* ★ 크게 */
+  font-size:1.05rem;
+  color:var(--text);line-height:1.7;
 }
 .done-title{
-  font-family:'Cinzel',serif;font-size:0.82rem;
-  color:var(--gold2);margin-bottom:0.25rem;
+  font-family:'Cinzel',serif;font-size:0.95rem;
+  color:var(--gold2);margin-bottom:0.3rem;
   letter-spacing:0.04rem;
 }
 
 /* ── 홈으로 버튼 ── */
 .home-btn{
-  display:block;width:100%;margin-top:1.5rem;padding:0.85rem;
+  display:block;width:100%;
+  /* ★ 상단 여백 + 하단 여백 넉넉히 */
+  margin-top:1.5rem;
+  margin-bottom:2rem;
+  padding:1rem;
   background:linear-gradient(135deg,#7A1F3A,#D4879A,#7A1F3A);
   border:1px solid var(--gold);border-radius:8px;
   color:var(--ivory);font-family:'Cinzel',serif;
-  font-size:0.88rem;font-weight:700;letter-spacing:0.08rem;
+  /* ★ 크게 */
+  font-size:1rem;
+  font-weight:700;letter-spacing:0.08rem;
   cursor:pointer;transition:all 0.3s;text-align:center;
   text-decoration:none;
 }
@@ -225,7 +254,7 @@ html,body{
         아래 방법으로 홈 화면에 추가하면<br>
         앱처럼 바로 기도를 시작할 수 있어요
       </div>
-      <div class="intro-url">www.rosarynovena.org</div>
+      <a class="intro-url" href="https://www.rosarynovena.org">www.rosarynovena.org</a>
     </div>
 
     <!-- 구분선 -->
@@ -233,10 +262,10 @@ html,body{
 
     <!-- 탭 -->
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('chrome')">🟡 크롬<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('naver')">🟢 네이버<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('edge')">🔵 엣지<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('safari')">🍎 사파리<br><span style="font-size:0.65rem;opacity:0.75">아이폰</span></div>
+      <div class="tab active" onclick="switchTab('chrome')">🟡 크롬<br><span style="font-size:0.72rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('naver')">🟢 네이버<br><span style="font-size:0.72rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('edge')">🔵 엣지<br><span style="font-size:0.72rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('safari')">🍎 사파리<br><span style="font-size:0.72rem;opacity:0.75">아이폰</span></div>
     </div>
 
     <!-- ── 크롬 ── -->
@@ -255,7 +284,7 @@ html,body{
             <div class="step-title">점 세 개 메뉴 누르기</div>
             <div class="step-desc">화면 오른쪽 위 <span class="hl">⋮ 버튼</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4879A"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#D4879A"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg>
               오른쪽 위 — 세로 점 세 개 버튼
             </div>
           </div>
@@ -297,8 +326,8 @@ html,body{
             <div class="step-title">줄 두 개(☰) 버튼 누르기</div>
             <div class="step-desc">화면 오른쪽 아래 <span class="hl">☰ 버튼</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="14" viewBox="0 0 22 14" fill="none" stroke="#D4879A" stroke-width="2.5" stroke-linecap="round"><line x1="0" y1="3" x2="22" y2="3"/><line x1="0" y1="11" x2="22" y2="11"/></svg>
-              오른쪽 아래 — 수평 줄 두 개 버튼 (점 세 개 아님!)
+              <svg width="20" height="16" viewBox="0 0 22 14" fill="none" stroke="#D4879A" stroke-width="2.5" stroke-linecap="round"><line x1="0" y1="3" x2="22" y2="3"/><line x1="0" y1="11" x2="22" y2="11"/></svg>
+              오른쪽 아래 — 수평 줄 두 개 (점 세 개 아님!)
             </div>
           </div>
         </div>
@@ -308,7 +337,7 @@ html,body{
             <div class="step-title">"홈 화면에 추가" 선택</div>
             <div class="step-desc">메뉴가 올라오면<br><span class="hl">⊕ 홈 화면에 추가</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
               목록에서 "홈 화면에 추가" 항목 선택
             </div>
           </div>
@@ -343,7 +372,7 @@ html,body{
             <div class="step-title">줄 세 개(☰) 메뉴 누르기</div>
             <div class="step-desc">화면 오른쪽 위 <span class="hl">☰ 버튼</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="16" viewBox="0 0 22 16" fill="none" stroke="#D4879A" stroke-width="2.5" stroke-linecap="round"><line x1="0" y1="2" x2="22" y2="2"/><line x1="0" y1="8" x2="22" y2="8"/><line x1="0" y1="14" x2="22" y2="14"/></svg>
+              <svg width="20" height="18" viewBox="0 0 22 16" fill="none" stroke="#D4879A" stroke-width="2.5" stroke-linecap="round"><line x1="0" y1="2" x2="22" y2="2"/><line x1="0" y1="8" x2="22" y2="8"/><line x1="0" y1="14" x2="22" y2="14"/></svg>
               오른쪽 위 — 수평 줄 세 개 버튼
             </div>
           </div>
@@ -354,7 +383,7 @@ html,body{
             <div class="step-title">"휴대폰에 추가" 선택</div>
             <div class="step-desc">메뉴 아이콘 목록에서<br><span class="hl">휴대폰에 추가</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><rect x="7" y="2" width="10" height="18" rx="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="9.5" y1="9.5" x2="14.5" y2="9.5"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><rect x="7" y="2" width="10" height="18" rx="2"/><line x1="12" y1="7" x2="12" y2="12"/><line x1="9.5" y1="9.5" x2="14.5" y2="9.5"/></svg>
               아이콘 목록 두 번째 줄 — "휴대폰에 추가"
             </div>
           </div>
@@ -389,7 +418,7 @@ html,body{
             <div class="step-title">공유 버튼 누르기</div>
             <div class="step-desc">화면 아래 가운데 <span class="hl">□↑ 공유 버튼</span> 누르기</div>
             <div class="step-note">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4879A" stroke-width="2"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
               화면 아래 중앙 — 네모+위화살표 모양
             </div>
           </div>
@@ -415,7 +444,7 @@ html,body{
       </div>
     </div>
 
-    <!-- 홈으로 버튼 -->
+    <!-- ★ 홈으로 버튼 — margin-bottom으로 잘림 방지 -->
     <a class="home-btn" href="/">← 기도 시작하러 가기</a>
 
   </div><!-- /scroll-body -->
