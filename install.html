@@ -47,7 +47,7 @@ html,body{
 .back-btn:hover{background:rgba(201,162,82,0.1);}
 /* 다른 화면과 동일한 back-label */
 .back-label{
-  font-family:'Cinzel',serif;font-size:0.78rem;color:var(--dim);
+  font-family:'Cinzel',serif;font-size:1rem;color:var(--text);
   letter-spacing:0.04rem;pointer-events:none;
 }
 
@@ -106,25 +106,21 @@ html,body{
 
 /* ── 탭 ── */
 .tabs{
-  display:flex;gap:0.4rem;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr 1fr;
+  gap:0.4rem;
   margin-bottom:1.1rem;
-  overflow-x:auto;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:2px;
 }
-.tabs::-webkit-scrollbar{display:none;}
 .tab{
-  flex:0 0 auto;
-  padding:0.55rem 0.75rem;
+  padding:0.55rem 0.3rem;
   border:1px solid var(--border);
   border-radius:10px;
   background:transparent;
   color:var(--dim);
   font-family:'Cinzel',serif;
-  font-size:1.05rem;
+  font-size:0.9rem;
   cursor:pointer;
   text-align:center;
-  white-space:nowrap;
   transition:all 0.2s;
   line-height:1.5;
 }
