@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>앱 설치 안내 · 묵주 9일 기도</title>
 <meta name="theme-color" content="#3D010D">
+
+<!-- ── 카카오톡 / SNS 공유 메타태그 (앱 설치 안내) ── -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.rosarynovena.org/install">
+<meta property="og:title" content="📱 앱 설치 안내 · 묵주 9일 기도">
+<meta property="og:description" content="홈 화면에 추가하면 앱처럼 바로 기도를 시작할 수 있어요. www.rosarynovena.org">
+<meta property="og:image" content="https://www.rosarynovena.org/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:site_name" content="묵주 9일 기도">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="📱 앱 설치 안내 · 묵주 9일 기도">
+<meta name="twitter:description" content="홈 화면에 추가하면 앱처럼 바로 기도를 시작할 수 있어요.">
+<meta name="twitter:image" content="https://www.rosarynovena.org/icon-512.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -15,22 +31,17 @@
   --border:rgba(212,135,154,0.2);
 }
 html,body{
-  height:100%;
-  background:var(--bg);
-  color:var(--text);
+  height:100%;background:var(--bg);color:var(--text);
   font-family:'EB Garamond',Georgia,serif;
   display:flex;justify-content:center;
 }
 #app{
   position:fixed;top:0;left:0;right:0;bottom:0;
   max-width:420px;margin:0 auto;
-  height:100%;height:100dvh;
-  overflow:hidden;
+  height:100dvh;overflow:hidden;
   background:linear-gradient(160deg,#2A0109 0%,#3D010D 55%,#480110 100%);
   display:flex;flex-direction:column;
 }
-
-/* ── 헤더 ── */
 .screen-header{
   padding:1rem 1.25rem 0.4rem;
   display:flex;align-items:center;gap:0.85rem;
@@ -38,175 +49,109 @@ html,body{
 }
 .back-btn{
   width:34px;height:34px;border-radius:50%;
-  border:1px solid var(--gold3);
-  background:transparent;color:var(--gold);
-  cursor:pointer;font-size:1rem;
+  border:1px solid var(--gold3);background:transparent;
+  color:var(--gold);cursor:pointer;font-size:1rem;
   display:flex;align-items:center;justify-content:center;
   text-decoration:none;transition:all 0.2s;flex-shrink:0;
 }
 .back-btn:hover{background:rgba(201,162,82,0.1);}
-/* 다른 화면과 동일한 back-label */
 .back-label{
-  font-family:'Cinzel',serif;font-size:1rem;color:var(--text);
-  letter-spacing:0.04rem;pointer-events:none;
+  font-family:'Cinzel',serif;font-size:0.78rem;color:var(--dim);
+  letter-spacing:0.04rem;
 }
-
-/* ── 스크롤 바디 ── */
 .scroll-body{
   flex:1;overflow-y:auto;
   padding:0.5rem 1.25rem 100px;
   -webkit-overflow-scrolling:touch;
 }
-
-/* ── 인트로 ── */
-.intro-wrap{
-  text-align:center;
-  padding:1rem 0 1.2rem;
-}
-.intro-icon{font-size:2.4rem;display:block;margin-bottom:0.6rem;}
+/* 인트로 */
+.intro-wrap{text-align:center;padding:1rem 0 0.5rem;}
+.intro-icon{font-size:2.2rem;}
 .intro-title{
-  font-family:'Cinzel',serif;
-  font-size:1.35rem;
-  color:var(--ivory);
-  letter-spacing:0.04rem;
-  margin-bottom:0.55rem;
-  line-height:1.4;
+  font-family:'Cinzel',serif;font-size:1.15rem;font-weight:700;
+  color:var(--ivory);margin:0.6rem 0 0.4rem;letter-spacing:0.04rem;
 }
 .intro-desc{
-  font-size:1.1rem;
-  color:var(--text);
-  line-height:1.8;
-  margin-bottom:0.9rem;
+  font-size:0.95rem;color:var(--text);line-height:1.75;margin-bottom:0.8rem;
 }
-/* URL 박스 — 크고 명확하게 */
+/* URL 링크 */
 .intro-url{
   display:inline-block;
-  font-family:'EB Garamond',Georgia,serif;
-  font-size:1.25rem;
-  color:var(--gold2);
-  background:rgba(212,135,154,0.1);
-  border:1px solid rgba(212,135,154,0.35);
-  border-radius:8px;
-  padding:0.5rem 1.2rem;
-  letter-spacing:0.02rem;
+  font-family:'Cinzel',serif;font-size:0.95rem;font-weight:600;
+  color:var(--gold);letter-spacing:0.05rem;
+  border-bottom:1px solid rgba(201,162,82,0.4);
+  padding-bottom:2px;text-decoration:none;
+  transition:color 0.2s,border-color 0.2s;
 }
-
-/* ── 구분선 ── */
+.intro-url:hover{color:var(--gold2);border-color:var(--gold2);}
+/* 구분선 */
 .gold-line{
-  display:flex;align-items:center;gap:0.8rem;
-  margin:0.8rem 0;
+  display:flex;align-items:center;gap:0.75rem;
+  margin:1rem 0 0.8rem;
 }
 .gold-line::before,.gold-line::after{
   content:'';flex:1;height:1px;
-  background:rgba(212,135,154,0.25);
+  background:linear-gradient(to right,transparent,rgba(212,135,154,0.3));
 }
-.gold-line span{
-  font-size:0.75rem;color:var(--gold3);
-}
-
-/* ── 탭 ── */
-.tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr 1fr;
-  gap:0.4rem;
-  margin-bottom:1.1rem;
-}
+.gold-line::after{background:linear-gradient(to left,transparent,rgba(212,135,154,0.3));}
+.gold-line span{font-size:0.75rem;color:var(--gold3);}
+/* 탭 */
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:0.4rem;margin-bottom:1rem;}
 .tab{
-  padding:0.55rem 0.3rem;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:transparent;
-  color:var(--dim);
-  font-family:'Cinzel',serif;
-  font-size:0.9rem;
-  cursor:pointer;
-  text-align:center;
-  transition:all 0.2s;
-  line-height:1.5;
+  padding:0.55rem 0.25rem;border:1px solid var(--border);border-radius:8px;
+  font-family:'Cinzel',serif;font-size:0.72rem;font-weight:600;
+  color:var(--dim);text-align:center;cursor:pointer;
+  background:rgba(212,135,154,0.04);transition:all 0.2s;line-height:1.4;
 }
 .tab.active{
-  background:rgba(212,135,154,0.15);
-  border-color:var(--gold3);
-  color:var(--gold);
+  border-color:var(--gold3);color:var(--gold);
+  background:rgba(212,135,154,0.12);
 }
-
-/* ── 패널 ── */
+/* 패널 */
 .panel{display:none;}
 .panel.active{display:block;}
-
-/* ── 스텝 ── */
+/* 단계 */
 .step-list{display:flex;flex-direction:column;gap:0.75rem;}
 .step{
-  display:flex;gap:0.9rem;align-items:flex-start;
-  padding:1rem 1.1rem;
-  border:1px solid var(--border);
-  border-left:3px solid var(--gold3);
-  border-radius:0 10px 10px 0;
+  display:flex;gap:0.85rem;align-items:flex-start;
+  padding:0.9rem 1rem;border:1px solid var(--border);border-radius:10px;
   background:rgba(212,135,154,0.04);
 }
 .step-num{
-  width:30px;height:30px;
-  border-radius:50%;
-  background:rgba(212,135,154,0.18);
-  border:1px solid var(--gold3);
-  color:var(--gold);
-  font-family:'Cinzel',serif;
-  font-size:1rem;
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid var(--gold3);color:var(--gold);
+  font-family:'Cinzel',serif;font-size:0.85rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  margin-top:0.1rem;
 }
-.step-body{flex:1;}
 .step-title{
-  font-family:'Cinzel',serif;
-  font-size:1.15rem;
-  color:var(--gold);
-  margin-bottom:0.35rem;
-  letter-spacing:0.03rem;
+  font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);
+  font-weight:600;margin-bottom:0.35rem;
 }
-.step-desc{
-  font-size:1.1rem;
-  color:var(--text);
-  line-height:1.8;
-}
-/* 강조 텍스트 (주소, 버튼명 등) */
+.step-desc{font-size:0.88rem;color:var(--text);line-height:1.75;}
 .hl{
-  display:inline-block;
-  font-family:'EB Garamond',Georgia,serif;
-  font-size:1.1rem;
-  color:var(--gold2);
-  background:rgba(212,135,154,0.1);
-  border:1px solid rgba(212,135,154,0.3);
-  border-radius:5px;
-  padding:0.1rem 0.5rem;
-  margin:0 0.1rem;
+  display:inline-block;font-family:'Cinzel',serif;
+  font-size:0.85rem;color:var(--gold);
+  border:1px solid rgba(201,162,82,0.3);border-radius:4px;
+  padding:0.05rem 0.4rem;background:rgba(201,162,82,0.06);
+  text-decoration:none;
 }
-
-/* ── 하단 버튼 ── */
+/* 홈 버튼 */
 .home-btn{
   display:block;width:100%;
-  margin-top:1.5rem;
-  margin-bottom:2rem;
-  padding:1rem;
+  margin-top:1.5rem;margin-bottom:2rem;padding:1rem;
   background:linear-gradient(135deg,#7A1F3A,#D4879A,#7A1F3A);
-  border:1px solid var(--gold);
-  border-radius:10px;
-  color:var(--ivory);
-  font-family:'Cinzel',serif;
-  font-size:1.1rem;
-  font-weight:700;
-  letter-spacing:0.08rem;
-  cursor:pointer;
-  text-align:center;
-  text-decoration:none;
-  transition:all 0.3s;
+  border:1px solid var(--gold);border-radius:8px;
+  color:var(--ivory);font-family:'Cinzel',serif;
+  font-size:1rem;font-weight:700;letter-spacing:0.08rem;
+  cursor:pointer;transition:all 0.3s;text-align:center;text-decoration:none;
 }
-.home-btn:hover{box-shadow:0 4px 20px rgba(212,135,154,0.25);}
+.home-btn:hover{box-shadow:0 4px 20px rgba(212,135,154,0.25);transform:translateY(-1px);}
 </style>
 </head>
 <body>
 <div id="app">
-
-  <!-- 헤더 — 다른 화면과 동일 구조 -->
+  <!-- 헤더 -->
   <div class="screen-header">
     <a class="back-btn" href="/" title="홈으로 돌아가기">←</a>
     <span class="back-label">돌아가기</span>
@@ -223,7 +168,7 @@ html,body{
         아래 방법으로 홈 화면에 추가하면<br>
         앱처럼 바로 기도를 시작할 수 있어요
       </div>
-      <div class="intro-url">www.rosarynovena.org</div>
+      <a href="https://www.rosarynovena.org" class="intro-url">www.rosarynovena.org</a>
     </div>
 
     <!-- 구분선 -->
@@ -231,162 +176,135 @@ html,body{
 
     <!-- 탭 -->
     <div class="tabs">
-      <div class="tab active" onclick="switchTab('chrome')">🟡 크롬<br><span style="font-size:0.9rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('naver')">🟢 네이버<br><span style="font-size:0.9rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('edge')">🔵 엣지<br><span style="font-size:0.9rem;opacity:0.75">안드로이드</span></div>
-      <div class="tab" onclick="switchTab('safari')">🍎 사파리<br><span style="font-size:0.9rem;opacity:0.75">아이폰</span></div>
+      <div class="tab active" onclick="switchTab('chrome')">🟡 크롬<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('naver')">🟢 네이버<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('edge')">🔵 엣지<br><span style="font-size:0.65rem;opacity:0.75">안드로이드</span></div>
+      <div class="tab" onclick="switchTab('safari')">🍎 사파리<br><span style="font-size:0.65rem;opacity:0.75">아이폰</span></div>
     </div>
 
-    <!-- ── 크롬 ── -->
+    <!-- 크롬 -->
     <div class="panel active" id="tab-chrome">
       <div class="step-list">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">크롬으로 주소 입력</div>
-            <div class="step-desc">크롬 앱을 열고 주소창에<br><span class="hl">www.rosarynovena.org</span> 입력 후 이동</div>
+            <div class="step-desc">크롬 앱을 열고 주소창에<br><a href="https://www.rosarynovena.org" class="hl">www.rosarynovena.org</a> 입력 후 이동</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">점 세 개 메뉴 누르기</div>
-            <div class="step-desc">화면 오른쪽 위 <span class="hl">⋮</span> 버튼 누르기</div>
+            <div class="step-desc">화면 오른쪽 위 <b>⋮</b> 버튼 누르기</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">홈 화면에 추가</div>
-            <div class="step-desc">메뉴에서 <span class="hl">홈 화면에 추가</span> 선택</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <div class="step-title">추가 확인</div>
-            <div class="step-desc"><span class="hl">추가</span> 버튼을 눌러 완료</div>
+            <div class="step-desc">메뉴에서 <b>홈 화면에 추가</b> 선택 후 <b>추가</b> 누르기</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── 네이버 ── -->
+    <!-- 네이버 -->
     <div class="panel" id="tab-naver">
       <div class="step-list">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">네이버 앱으로 주소 입력</div>
-            <div class="step-desc">네이버 앱 주소창에<br><span class="hl">www.rosarynovena.org</span> 입력 후 이동</div>
+            <div class="step-desc">네이버 앱을 열고 주소창에<br><a href="https://www.rosarynovena.org" class="hl">www.rosarynovena.org</a> 입력 후 이동</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">더보기 메뉴 누르기</div>
-            <div class="step-desc">화면 오른쪽 아래 <span class="hl">☰</span> 버튼 누르기</div>
+            <div class="step-title">하단 메뉴 열기</div>
+            <div class="step-desc">화면 하단 가운데 <b>⋯</b> (더보기) 버튼 누르기</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">바탕화면에 추가</div>
-            <div class="step-desc">메뉴에서 <span class="hl">바탕화면에 추가</span> 선택</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <div class="step-title">추가 확인</div>
-            <div class="step-desc"><span class="hl">추가</span> 버튼을 눌러 완료</div>
+            <div class="step-desc"><b>바탕화면에 추가</b> 선택 후 <b>추가</b> 누르기</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── 엣지 ── -->
+    <!-- 엣지 -->
     <div class="panel" id="tab-edge">
       <div class="step-list">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">엣지로 주소 입력</div>
-            <div class="step-desc">엣지 앱 주소창에<br><span class="hl">www.rosarynovena.org</span> 입력 후 이동</div>
+            <div class="step-desc">엣지 앱을 열고 주소창에<br><a href="https://www.rosarynovena.org" class="hl">www.rosarynovena.org</a> 입력 후 이동</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">하단 메뉴 누르기</div>
-            <div class="step-desc">화면 아래 가운데 <span class="hl">···</span> 버튼 누르기</div>
+            <div class="step-title">점 세 개 메뉴 누르기</div>
+            <div class="step-desc">화면 하단 가운데 <b>⋯</b> 버튼 누르기</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">휴대폰에 추가</div>
-            <div class="step-desc">메뉴에서 <span class="hl">휴대폰에 추가</span> 선택</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <div class="step-title">추가 확인</div>
-            <div class="step-desc"><span class="hl">추가</span> 버튼을 눌러 완료</div>
+            <div class="step-desc"><b>휴대폰에 추가</b> → <b>홈 화면에 추가</b> 선택 후 <b>추가</b> 누르기</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ── 사파리 ── -->
+    <!-- 사파리 (아이폰) -->
     <div class="panel" id="tab-safari">
       <div class="step-list">
         <div class="step">
           <div class="step-num">1</div>
           <div class="step-body">
             <div class="step-title">사파리로 주소 입력</div>
-            <div class="step-desc">사파리 주소창에<br><span class="hl">www.rosarynovena.org</span> 입력 후 이동</div>
+            <div class="step-desc">사파리 앱을 열고 주소창에<br><a href="https://www.rosarynovena.org" class="hl">www.rosarynovena.org</a> 입력 후 이동</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">2</div>
           <div class="step-body">
             <div class="step-title">공유 버튼 누르기</div>
-            <div class="step-desc">화면 아래 <span class="hl">⎙</span> 공유 버튼 누르기</div>
+            <div class="step-desc">화면 하단 가운데 <b>□↑</b> (공유) 버튼 누르기</div>
           </div>
         </div>
         <div class="step">
           <div class="step-num">3</div>
           <div class="step-body">
             <div class="step-title">홈 화면에 추가</div>
-            <div class="step-desc">메뉴에서 <span class="hl">홈 화면에 추가</span> 선택</div>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-body">
-            <div class="step-title">추가 확인</div>
-            <div class="step-desc">오른쪽 위 <span class="hl">추가</span> 버튼 눌러 완료</div>
+            <div class="step-desc">메뉴에서 <b>홈 화면에 추가</b> 선택 후 <b>추가</b> 누르기</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- 하단 버튼 -->
-    <a class="home-btn" href="/">← 기도 시작하러 가기</a>
+    <!-- 홈 버튼 -->
+    <a href="/" class="home-btn">🙏 &nbsp;기도 시작하러 가기</a>
 
-  </div><!-- end scroll-body -->
-</div><!-- end app -->
+  </div>
+</div>
 
 <script>
 function switchTab(id) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  const tabs = document.querySelectorAll('.tab');
-  const map = {chrome:0, naver:1, edge:2, safari:3};
-  tabs[map[id]].classList.add('active');
-  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const ids = ['chrome','naver','edge','safari'];
+    t.classList.toggle('active', ids[i] === id);
+  });
+  document.querySelectorAll('.panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'tab-'+id);
+  });
 }
 </script>
 </body>
