@@ -1334,9 +1334,17 @@ function loadState() {
 }
 function saveState() {
   try { localStorage.setItem('rosary9day', JSON.stringify(state)); } catch(e){}
-  // 로그인 상태면 Firestore에도 동기화
-  if (window.currentUser && window.currentUser.uid && window.saveStateToFirestore) {
-    window.saveStateToFirestore(window.currentUser.uid, state);
+  // 로그인 상태면 Firestore에도 동기화 (SDK 로드 대기)
+  var _uid = window.currentUser && window.currentUser.uid;
+  if (_uid) {
+    function trySaveFS(retries) {
+      if (window.saveStateToFirestore) {
+        window.saveStateToFirestore(_uid, JSON.parse(JSON.stringify(state)));
+      } else if (retries > 0) {
+        setTimeout(function(){ trySaveFS(retries-1); }, 300);
+      }
+    }
+    trySaveFS(10);
   }
 }
 
@@ -1621,24 +1629,37 @@ function onLoginSuccess(user) {
   sessionStorage.removeItem('loginReturnTarget');
   loginReturnTarget = 'home';
 
-  // ── Firestore에서 기도 기록 불러와 state 병합 ──
-  if (user.uid && window.loadStateFromFirestore) {
-    window.loadStateFromFirestore(user.uid).then(function(fsData) {
-      if (fsData) {
-        // Firestore 데이터가 있으면 state에 병합 (completedCells, pDay, tDay 등)
-        if (fsData.completedCells) state.completedCells = fsData.completedCells;
-        if (fsData.pDay !== undefined) state.pDay = fsData.pDay;
-        if (fsData.tDay !== undefined) state.tDay = fsData.tDay;
-        if (fsData.selectedMystery) state.selectedMystery = fsData.selectedMystery;
-        if (fsData.currentDay !== undefined) state.currentDay = fsData.currentDay;
-        // localStorage에도 최신 상태 반영
-        try { localStorage.setItem('rosary9day', JSON.stringify(state)); } catch(e){}
-      }
+  // ── Firestore에서 기도 기록 불러와 state 병합 (재시도 포함) ──
+  function applyFsData(fsData) {
+    if (!fsData) return;
+    if (fsData.completedCells) state.completedCells = fsData.completedCells;
+    if (fsData.pDay !== undefined) state.pDay = fsData.pDay;
+    if (fsData.tDay !== undefined) state.tDay = fsData.tDay;
+    if (fsData.selectedMystery) state.selectedMystery = fsData.selectedMystery;
+    if (fsData.currentDay !== undefined) state.currentDay = fsData.currentDay;
+    try { localStorage.setItem('rosary9day', JSON.stringify(state)); } catch(e){}
+  }
+
+  function tryLoadAndGo(uid, retries) {
+    if (window.loadStateFromFirestore) {
+      window.loadStateFromFirestore(uid).then(function(fsData) {
+        applyFsData(fsData);
+        goTo(target);
+        renderHome();
+      }).catch(function() {
+        goTo(target);
+        renderHome();
+      });
+    } else if (retries > 0) {
+      // Firebase SDK 아직 로드 중 → 300ms 후 재시도
+      setTimeout(function() { tryLoadAndGo(uid, retries - 1); }, 300);
+    } else {
       goTo(target);
-      renderHome();
-    }).catch(function() {
-      goTo(target);
-    });
+    }
+  }
+
+  if (user.uid) {
+    tryLoadAndGo(user.uid, 10);
   } else {
     goTo(target);
   }
@@ -2619,7 +2640,7 @@ import { getFirestore, doc, setDoc, getDoc, updateDoc, serverTimestamp,
 // Firebase 설정
 const firebaseConfig = {
   apiKey: "AIzaSyD9df1DKJCQAHgy2jLnomS__3LPgWAz52U",
-  authDomain: "www.rosarynovena.org",
+  authDomain: "rosary-novena.firebaseapp.com",
   projectId: "rosary-novena",
   storageBucket: "rosary-novena.firebasestorage.app",
   messagingSenderId: "947677488679",
@@ -2963,7 +2984,7 @@ import { getFirestore, doc, setDoc, serverTimestamp }
 import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
 const _cfg = {
   apiKey: "AIzaSyD9df1DKJCQAHgy2jLnomS__3LPgWAz52U",
-  authDomain: "www.rosarynovena.org",
+  authDomain: "rosary-novena.firebaseapp.com",
   projectId: "rosary-novena",
   storageBucket: "rosary-novena.firebasestorage.app",
   messagingSenderId: "947677488679",
@@ -3084,7 +3105,7 @@ import { getFirestore, doc, setDoc, serverTimestamp }
 import { getApps, initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
 const _cfg2 = {
   apiKey: "AIzaSyD9df1DKJCQAHgy2jLnomS__3LPgWAz52U",
-  authDomain: "www.rosarynovena.org",
+  authDomain: "rosary-novena.firebaseapp.com",
   projectId: "rosary-novena",
   storageBucket: "rosary-novena.firebasestorage.app",
   messagingSenderId: "947677488679",
