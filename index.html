@@ -1632,11 +1632,13 @@ function onLoginSuccess(user) {
   // ── Firestore에서 기도 기록 불러와 state 병합 (재시도 포함) ──
   function applyFsData(fsData) {
     if (!fsData) return;
-    if (fsData.completedCells) state.completedCells = fsData.completedCells;
-    if (fsData.pDay !== undefined) state.pDay = fsData.pDay;
-    if (fsData.tDay !== undefined) state.tDay = fsData.tDay;
-    if (fsData.selectedMystery) state.selectedMystery = fsData.selectedMystery;
-    if (fsData.currentDay !== undefined) state.currentDay = fsData.currentDay;
+    // Firestore 데이터를 state에 완전히 덮어씌움 (undefined인 경우도 처리)
+    state.completedCells  = fsData.completedCells  || {};
+    state.pDay            = fsData.pDay            !== undefined ? fsData.pDay        : state.pDay;
+    state.tDay            = fsData.tDay            !== undefined ? fsData.tDay        : state.tDay;
+    state.selectedMystery = fsData.selectedMystery || state.selectedMystery;
+    state.currentDay      = fsData.currentDay      !== undefined ? fsData.currentDay  : state.currentDay;
+    console.log('[onLogin] Firestore → state 병합 완료 | pDay:', state.pDay, 'tDay:', state.tDay, 'cells:', Object.keys(state.completedCells).length);
     try { localStorage.setItem('rosary9day', JSON.stringify(state)); } catch(e){}
   }
 
@@ -2758,19 +2760,31 @@ window.firebaseSignOut = async function() {
 // ─── 기도 기록 Firestore 저장 ───
 window.saveStateToFirestore = async function(uid, stateData) {
   try {
-    await setDoc(doc(db, 'prayers', uid), {
-      ...stateData,
-      updatedAt: serverTimestamp()
-    }, { merge: true });
-  } catch(e) { console.log('기도 기록 저장 오류:', e); }
+    // 명시적 필드로 저장 (spread 대신 직접 지정)
+    const payload = {
+      completedCells: stateData.completedCells || {},
+      pDay:           stateData.pDay           !== undefined ? stateData.pDay           : 0,
+      tDay:           stateData.tDay           !== undefined ? stateData.tDay           : 0,
+      currentDay:     stateData.currentDay     !== undefined ? stateData.currentDay     : 1,
+      selectedMystery: stateData.selectedMystery || 'joy',
+      updatedAt:      serverTimestamp()
+    };
+    await setDoc(doc(db, 'prayers', uid), payload);
+    console.log('[Firestore] 기도 기록 저장 완료 | pDay:', payload.pDay, 'tDay:', payload.tDay, 'cells:', Object.keys(payload.completedCells).length);
+  } catch(e) { console.error('[Firestore] 기도 기록 저장 오류:', e); }
 };
 
 // ─── 기도 기록 Firestore 불러오기 ───
 window.loadStateFromFirestore = async function(uid) {
   try {
     const snap = await getDoc(doc(db, 'prayers', uid));
-    if (snap.exists()) return snap.data();
-  } catch(e) { console.log('기도 기록 불러오기 오류:', e); }
+    if (snap.exists()) {
+      const data = snap.data();
+      console.log('[Firestore] 기도 기록 로드 완료 | pDay:', data.pDay, 'tDay:', data.tDay, 'cells:', Object.keys(data.completedCells || {}).length);
+      return data;
+    }
+    console.log('[Firestore] 기도 기록 없음 (신규 사용자)');
+  } catch(e) { console.error('[Firestore] 기도 기록 불러오기 오류:', e); }
   return null;
 };
 
