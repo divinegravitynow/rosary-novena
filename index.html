@@ -1615,6 +1615,7 @@ let loginReturnTarget = sessionStorage.getItem('loginReturnTarget') || 'home';
 // 로그인 성공 처리 (Firebase 연동 후 여기서 호출)
 function onLoginSuccess(user) {
   currentUser = user;
+  window.currentUser = user;   // ★ saveState()의 Firestore 동기화가 참조하는 전역 변수
   updateMenuAuthCard();
   updateHomeLoginBtn();
   // 로그인 후 공지 뱃지 새로고침
@@ -1632,13 +1633,18 @@ function onLoginSuccess(user) {
   // ── Firestore에서 기도 기록 불러와 state 병합 (재시도 포함) ──
   function applyFsData(fsData) {
     if (!fsData) return;
-    // Firestore 데이터를 state에 완전히 덮어씌움 (undefined인 경우도 처리)
-    state.completedCells  = fsData.completedCells  || {};
-    state.pDay            = fsData.pDay            !== undefined ? fsData.pDay        : state.pDay;
-    state.tDay            = fsData.tDay            !== undefined ? fsData.tDay        : state.tDay;
+    // ★ 병합 전략: 두 기기 데이터의 합집합 — 어느 쪽 기도 기록도 잃지 않음
+    const localCells  = state.completedCells || {};
+    const remoteCells = fsData.completedCells || {};
+    state.completedCells = Object.assign({}, localCells, remoteCells);
+    // 일차 카운터는 셀 데이터에서 재계산 (가장 정확)
+    const pCnt = Object.keys(state.completedCells).filter(k => k.indexOf('p_') === 0).length;
+    const tCnt = Object.keys(state.completedCells).filter(k => k.indexOf('t_') === 0).length;
+    state.pDay = Math.max(pCnt, state.pDay || 0, fsData.pDay || 0);
+    state.tDay = Math.max(tCnt, state.tDay || 0, fsData.tDay || 0);
+    state.currentDay = Math.max(state.currentDay || 1, fsData.currentDay || 1);
     state.selectedMystery = fsData.selectedMystery || state.selectedMystery;
-    state.currentDay      = fsData.currentDay      !== undefined ? fsData.currentDay  : state.currentDay;
-    console.log('[onLogin] Firestore → state 병합 완료 | pDay:', state.pDay, 'tDay:', state.tDay, 'cells:', Object.keys(state.completedCells).length);
+    console.log('[onLogin] 병합 완료 | pDay:', state.pDay, 'tDay:', state.tDay, 'cells:', Object.keys(state.completedCells).length);
     try { localStorage.setItem('rosary9day', JSON.stringify(state)); } catch(e){}
   }
 
@@ -1646,6 +1652,10 @@ function onLoginSuccess(user) {
     if (window.loadStateFromFirestore) {
       window.loadStateFromFirestore(uid).then(function(fsData) {
         applyFsData(fsData);
+        // ★ 병합된 최신 상태를 Firestore에 다시 업로드 (양방향 동기화)
+        if (window.saveStateToFirestore) {
+          window.saveStateToFirestore(uid, JSON.parse(JSON.stringify(state)));
+        }
         goTo(target);
         renderHome();
       }).catch(function() {
