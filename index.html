@@ -996,6 +996,9 @@ body{
       <p style="font-family:'Cinzel',serif;font-size:0.9rem;color:var(--gold);margin-bottom:0.2rem;">감사합니다</p>
       <p style="font-size:0.82rem;color:var(--dim);">잘 새겨듣겠습니다</p>
     </div>
+
+    <!-- 앱 버전 (동기화 문제 진단용) -->
+    <p id="app-version-lbl" style="text-align:center;font-size:0.7rem;color:var(--dim);opacity:0.6;margin-top:1.5rem;letter-spacing:0.05rem;"></p>
   </div>
 </section>
 
@@ -2632,6 +2635,17 @@ function resetProgress() {
 // ═══════════════════════════════════════
 // INIT
 // ═══════════════════════════════════════
+// ★ 앱 버전 (배포 시마다 갱신 — 동기화 문제 진단용)
+const APP_VERSION = 'v2026.07.02-sync3';
+console.log('%c묵주 9일 기도 ' + APP_VERSION, 'color:#D4879A;font-weight:bold;');
+(function(){
+  function setVer(){
+    var el = document.getElementById('app-version-lbl');
+    if(el) el.textContent = APP_VERSION;
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setVer);
+  else setVer();
+})();
 loadState();
 renderHome();
 // Scroll reset handled by element recreation in renderHome()
