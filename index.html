@@ -2675,6 +2675,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app-check.js";
+
+initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider("6LegZEEtAAAAAL_BtUAWiZMXyKLHuou43AozrLDb"),
+  isTokenAutoRefreshEnabled: true
+});
 const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
