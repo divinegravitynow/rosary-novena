@@ -551,7 +551,7 @@ body{
 <section class="screen" id="mystery-select">
   <div class="screen-header">
     <button class="back-btn" onclick="goTo('home')">←</button>
-    <span class="screen-title" id="ms-day-label">제 1일 · 신비 선택</span>
+    <span class="screen-title">신비 선택</span>
     <button class="menu-btn" onclick="goTo('menu-screen')">☰</button>
   </div>
   <div class="scroll-body">
@@ -2195,7 +2195,7 @@ function ordinal(n) { return n; }
 // MYSTERY SELECT
 // ═══════════════════════════════════════
 function renderMysterySelect() {
-  document.getElementById('ms-day-label').textContent = `제 ${state.currentDay}일 · 신비 선택`;
+  // 날짜 표시는 홈 화면(청원/감사 진행 현황)에서만 보여주므로 여기서는 제거함(중복 방지)
 }
 
 function selectMystery(key) {
